@@ -1,16 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Library App</title>
 </head>
+
 <body>
     <main>
-        
+
+        <!--modal-->
+        <button type="button" id="new-book">NEW BOOK</button>
+        <dialog id="dialog">
+            <form method="dialog">
+                <p>
+                    <label for="title">Book Title</label>
+                    <input type="text" name="title" id="title" required>
+                </p>
+                <p>
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author" required>
+                </p>
+                <p>
+                    <label for="pages">#Pages</label>
+                    <input type="number" name="pages" id="pages" required>
+                </p>
+                <p>
+                    <label for="read">Read it?</label>
+                    <input type="radio" name="read" id="read-true" value="YES" checked> YES
+                    <input type="radio" name="read" id="read-false" value="NO"> NO
+                </p>
+                <button type="submit" id="add-book">ADD BOOK</button>
+            </form>
+        </dialog>
+
+        <!--card container-->
+        <div id="output"></div>
     </main>
-   
+
     <script src="script.js"></script>
 </body>
+
 </html>
