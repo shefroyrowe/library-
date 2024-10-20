@@ -27,17 +27,20 @@
                     <label for="pages">#Pages</label>
                     <input type="number" name="pages" id="pages" required>
                 </p>
-                <p>
-                    <label for="read">Read it?</label>
-                    <input type="radio" name="read" id="read-true" value="YES" checked> YES
-                    <input type="radio" name="read" id="read-false" value="NO"> NO
+                <p id="isRead">
+                <p>Read it?</p>
+                <input type="button" class="read-button" value="YES" id="yes">
+                <input type="button" class="read-button" value="NO" id="no">
                 </p>
-                <button type="submit" id="add-book">ADD BOOK</button>
+                <p>
+                    <button type="submit" id="add-book">ADD BOOK</button>
+                    <button value="cancel" id="cancel">CANCEL</button>
+                </p>
             </form>
         </dialog>
 
         <!--card container-->
-        <div id="output"></div>
+        <span id="output"></span>
     </main>
 
     <script src="script.js"></script>

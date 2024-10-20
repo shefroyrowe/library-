@@ -1,6 +1,26 @@
-const container = document.querySelector('main');
+const container = document.querySelector('#output');
+const newBookButton = document.getElementById('new-book');
+const addBookButton = document.getElementById('add-book');
+const dialog = document.getElementById('dialog');
 
-const myLibrary = []; //store books
+const title = document.getElementById('title');
+const author = document.getElementById('author');
+const pages = document.getElementById('pages');
+
+//======== is it read? ============================
+let read = "";
+const readStatus = document.querySelectorAll('.read-button');
+readStatus.forEach(input => input.addEventListener("click", (e) => {
+    if (e.target.id === 'yes') {
+        read = 'YES';
+    } else if (e.target.id === 'no') {
+        read = 'NO';
+    }
+}));
+//======= end is it read ======================
+
+//store books array
+const myLibrary = [];
 
 //book constructor
 function Book(title, author, pages, read) {
@@ -13,30 +33,67 @@ function Book(title, author, pages, read) {
     }
 }
 
-function addBookToLibrary() {
-    //create new book
+//create new book and push the new book to library array
+const addBookToLibrary = (title, author, pages, read) => {
     const book = new Book(title, author, pages, read);
-    myLibrary.push(book);//push book to library
-
-    //create html book elements
-    const card = document.createElement('div');
-    const cardTitle = document.createElement('h1');
-    const cardAuthor = document.createElement('h3');
-    const cardpages = document.createElement('span');
-    const cardRead = document.createElement('span');
-
-    //asign values to and append elements
-    cardTitle.textContent = book.title;
-    cardAuthor.textContent = book.author;
-    cardpages.textContent = book.pages;
-    cardRead.textContent = book.read;
-
-    //append elements to card
-    card.appendChild(cardTitle);
-    card.appendChild(cardAuthor);
-    card.appendChild(cardpages);
-    card.appendChild(cardRead);
-
-    //append elements to dom
-    container.innerHTML += card;
+    myLibrary.push(book);
 }
+
+//check if book is in library then remove it from dom 
+//this function will duplicate each entry; so we remove one of each duplicate
+const sanitizeDom = () => {
+    const allBookDivs = document.querySelectorAll('div');
+
+    allBookDivs.forEach(div => {
+        if (myLibrary.indexOf(div.id)) {
+            container.removeChild(div);
+        }
+    });
+
+    //map library
+    myLibrary.map((book, index) => {
+
+        //append book elements to dom
+        container.innerHTML += `
+        <div class="book-card" id="${index}">
+            <h1>${book.title}</h1>
+            <h3>${book.author}</h3>
+            <span>Pages: ${book.pages}</span>
+            <br>
+            <span>Read book: ${book.read}</span>
+        </div>
+    `;
+    }
+    );
+
+    //clear form fields
+    title.value = '';
+    author.value = '';
+    pages.value = '';
+    read = '';
+};
+
+newBookButton.addEventListener("click", () => {
+    //show modal form element
+    dialog.showModal();
+});
+
+addBookButton.addEventListener("click", (e) => {
+    //prevent default form submission
+    e.preventDefault();
+    //call add book to library function to create new book using form data
+    addBookToLibrary(title.value, author.value, pages.value, read);
+    //call render function to append books to dom
+    sanitizeDom();
+
+    //close modal form element (not needed for modal; 
+    //only used as a fallback method)
+    dialog.close();
+});
+
+const cancelModal = document.getElementById('cancel');
+
+cancelModal.addEventListener("click", () => {
+   //this line is to watch the result in console , you can remove it later
+    console.log("Refreshed"); 
+});
