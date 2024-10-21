@@ -46,9 +46,8 @@ const populateDom = () => {
     //sanitizeDom - remove duplicates
     container.innerHTML = '';
 
-    //map library
     myLibrary.map((book, index) => {
-        //append book elements to dom
+        //append each new book to dom body
         container.innerHTML += `
         <div class="book-card" id="${index}">
             <h1>${book.title}</h1>
@@ -56,13 +55,16 @@ const populateDom = () => {
             <span>Pages: ${book.pages}</span>
             <br>
             <span>Read book?: ${book.read}</span>
-            <input type="button" value="CHANGE READ" id="change-read">
+            <br>
+            <input type="button" value="READ?" id="chane-read" />
+            <input type="button" value="REMOVE" id="remove-book" />
+
         </div>
     `;
     }
     );
 
-    //clear form fields
+    //clear form fields on each submit
     title.value = '';
     author.value = '';
     pages.value = '';
@@ -72,8 +74,8 @@ const populateDom = () => {
 
 //event listeners===================================================== //
 
+//show/open modal form element
 newBookButton.addEventListener("click", () => {
-    //show modal form element
     dialog.showModal();
 });
 

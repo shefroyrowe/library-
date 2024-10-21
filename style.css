@@ -1,5 +1,5 @@
 body {
-  background-image: url("elijah.jpg");
+  background-image: url("images/elijah.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   backdrop-filter: blur(1px);
@@ -7,7 +7,7 @@ body {
 }
 
 dialog::backdrop {
-    background-image: url("patrick-tomasso.jpg");
+    background-image: url("images/patrick-tomasso.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     backdrop-filter: blur(1px)
