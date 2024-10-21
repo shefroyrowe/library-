@@ -57,7 +57,7 @@ const populateDom = () => {
             <span>Read book?: ${book.read}</span>
             <br>
             <input type="button" value="READ?" id="chane-read" />
-            <input type="button" value="REMOVE" id="remove-book" />
+            <input type="button" value="REMOVE" id="remove-book" onclick="removeBook(${index})" />
 
         </div>
     `;
@@ -70,6 +70,11 @@ const populateDom = () => {
     pages.value = '';
 };
 
+//remove book from library and dom
+const removeBook = (index) => {
+    myLibrary.splice(Number(index), 1);
+    populateDom();
+}
 
 
 //event listeners===================================================== //
